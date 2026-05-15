@@ -1,5 +1,7 @@
 node_modules/
 public/
+Datos MongoDB.txt
+scripts/test-mongo.js
 .env
 .env.local
 .env.*.local

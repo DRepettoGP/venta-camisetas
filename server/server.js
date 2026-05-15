@@ -12,6 +12,7 @@ import { manejoErrores } from './middleware/manejoErrores.js';
 import authRoutes from './routes/authRoutes.js';
 import productoRoutes from './routes/productoRoutes.js';
 import pedidoRoutes from './routes/pedidoRoutes.js';
+import { poblarBaseDeDatos } from './controllers/setupController.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -56,6 +57,8 @@ const ensureDatabase = async (req, res, next) => {
 app.get('/api/salud', (req, res) => {
   res.status(200).json({ estado: 'Servidor funcionando correctamente' });
 });
+
+app.post('/api/setup/seed', ensureDatabase, poblarBaseDeDatos);
 
 app.use('/api', ensureDatabase);
 

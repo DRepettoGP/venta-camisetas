@@ -1,7 +1,10 @@
 import Producto from '../models/Producto.js';
+import { seedIfEmpty } from '../data/seedIfEmpty.js';
 
 export const obtenerProductos = async (req, res) => {
   try {
+    await seedIfEmpty();
+
     const { liga, equipo, busqueda, pagina = 1, limite = 12 } = req.query;
 
     const filtro = { activo: true };
@@ -131,6 +134,7 @@ export const eliminarProducto = async (req, res) => {
 
 export const obtenerLigas = async (req, res) => {
   try {
+    await seedIfEmpty();
     const ligas = await Producto.distinct('liga');
     res.status(200).json({ ligas });
   } catch (error) {
