@@ -263,7 +263,7 @@ async function cargarProductos(filtros = {}) {
     grid.appendChild(fragment);
   } catch (error) {
     document.getElementById('productos-grid').innerHTML =
-      '<div class="no-productos"><h3>Error al cargar productos</h3></div>';
+      `<div class="no-productos"><h3>${error.mensaje || 'Error al cargar productos'}</h3><p>Revisa MongoDB Atlas (Network Access) y MONGODB_URI en Vercel.</p></div>`;
     console.error(error);
   }
 }

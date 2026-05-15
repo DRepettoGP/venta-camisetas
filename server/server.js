@@ -33,22 +33,35 @@ const ensureDatabase = async (req, res, next) => {
     await connectDatabase();
     next();
   } catch (error) {
+    const esProduccion =
+      process.env.NODE_ENV === 'production' || process.env.VERCEL === '1';
+
+    let mensaje = 'No se pudo conectar a la base de datos';
+
+    if (!process.env.MONGODB_URI) {
+      mensaje =
+        'Falta la variable MONGODB_URI en Vercel (Settings → Environment Variables)';
+    } else if (error.message?.includes('whitelist') || error.message?.includes('IP')) {
+      mensaje =
+        'MongoDB Atlas bloquea la conexión. En Atlas → Network Access, añade 0.0.0.0/0 (Allow from anywhere)';
+    }
+
     res.status(503).json({
-      mensaje: 'No se pudo conectar a la base de datos',
-      error: process.env.NODE_ENV === 'development' ? error.message : undefined,
+      mensaje,
+      error: esProduccion ? undefined : error.message,
     });
   }
 };
+
+app.get('/api/salud', (req, res) => {
+  res.status(200).json({ estado: 'Servidor funcionando correctamente' });
+});
 
 app.use('/api', ensureDatabase);
 
 app.use('/api/auth', authRoutes);
 app.use('/api/productos', productoRoutes);
 app.use('/api/pedidos', pedidoRoutes);
-
-app.get('/api/salud', (req, res) => {
-  res.status(200).json({ estado: 'Servidor funcionando correctamente' });
-});
 
 if (!isVercel) {
   app.use((req, res) => {
