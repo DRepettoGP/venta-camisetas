@@ -2,7 +2,11 @@
   "name": "venta-camisetas",
   "version": "1.0.0",
   "description": "La Grada - plataforma online de venta de camisetas de fútbol",
+  "type": "module",
   "main": "server/server.js",
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "start": "node server/server.js",
     "dev": "cd server && npm run dev",
@@ -11,5 +15,14 @@
   },
   "keywords": ["ecommerce", "futbol", "camisetas"],
   "author": "Tu Equipo",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "helmet": "^7.0.0",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^7.0.0"
+  }
 }

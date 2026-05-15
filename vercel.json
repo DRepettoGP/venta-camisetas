@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "buildCommand": "npm install && cd server && npm install",
-  "env": {
-    "NODE_ENV": "production"
-  }
+  "installCommand": "npm install && npm install --prefix server",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/api"
+    }
+  ]
 }
-

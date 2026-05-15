@@ -35,6 +35,12 @@ app.get('/api/salud', (req, res) => {
 });
 
 app.use((req, res) => {
+  if (req.path.startsWith('/api')) {
+    return res.status(404).json({ mensaje: 'Ruta no encontrada' });
+  }
+  if (req.method === 'GET' || req.method === 'HEAD') {
+    return res.sendFile(path.join(__dirname, '../client/index.html'));
+  }
   res.status(404).json({ mensaje: 'Ruta no encontrada' });
 });
 
