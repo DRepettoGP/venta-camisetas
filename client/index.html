@@ -108,38 +108,57 @@
 
   <!-- Modal de Detalle de Producto -->
   <div id="modal-producto" class="modal">
-    <div class="modal-content">
+    <div class="modal-content modal-producto-content">
       <span class="modal-close">&times;</span>
-      <div class="modal-body">
+      <div class="modal-body modal-producto-body">
         <div class="modal-imagen">
           <img id="modal-img" src="" alt="Producto">
         </div>
         <div class="modal-info">
-          <h2 id="modal-nombre"></h2>
-          <p id="modal-descripcion"></p>
-          <div class="modal-precio">
-            <span id="modal-precio-value" class="precio"></span>
-          </div>
-          <div class="modal-stock">
-            <span id="modal-stock-value"></span>
-          </div>
+          <header class="modal-producto-header">
+            <h2 id="modal-nombre"></h2>
+            <div class="modal-precio-stock">
+              <span id="modal-precio-value" class="precio"></span>
+              <span id="modal-stock-value" class="modal-stock-badge"></span>
+            </div>
+          </header>
+
+          <p id="modal-descripcion" class="modal-descripcion"></p>
+
           <div class="modal-detalles">
-            <p><strong>Equipo:</strong> <span id="modal-equipo"></span></p>
-            <p><strong>Liga:</strong> <span id="modal-liga"></span></p>
-            <p><strong>Temporada:</strong> <span id="modal-temporada"></span></p>
-            <p><strong>Color:</strong> <span id="modal-color"></span></p>
+            <div class="modal-detalle-item">
+              <span class="modal-detalle-label">Equipo</span>
+              <span id="modal-equipo" class="modal-detalle-valor"></span>
+            </div>
+            <div class="modal-detalle-item">
+              <span class="modal-detalle-label">Liga</span>
+              <span id="modal-liga" class="modal-detalle-valor"></span>
+            </div>
+            <div class="modal-detalle-item">
+              <span class="modal-detalle-label">Temporada</span>
+              <span id="modal-temporada" class="modal-detalle-valor"></span>
+            </div>
+            <div class="modal-detalle-item">
+              <span class="modal-detalle-label">Color</span>
+              <span id="modal-color" class="modal-detalle-valor"></span>
+            </div>
           </div>
-          <div class="modal-talla">
-            <label for="modal-talla-select">Selecciona la talla:</label>
-            <select id="modal-talla-select" class="talla-select">
-              <option value="">-- Selecciona --</option>
-            </select>
+
+          <div class="modal-compra">
+            <div class="modal-opciones">
+              <div class="modal-talla">
+                <label for="modal-talla-select">Talla</label>
+                <select id="modal-talla-select" class="talla-select">
+                  <option value="">Seleccionar</option>
+                </select>
+              </div>
+              <div class="modal-cantidad">
+                <label for="modal-cantidad-input">Cantidad</label>
+                <input type="number" id="modal-cantidad-input" min="1" max="10" value="1">
+              </div>
+            </div>
+            <button id="modal-agregar-btn" class="btn-primario btn-modal-agregar">Agregar al carrito</button>
           </div>
-          <div class="modal-cantidad">
-            <label for="modal-cantidad-input">Cantidad:</label>
-            <input type="number" id="modal-cantidad-input" min="1" max="10" value="1">
-          </div>
-          <button id="modal-agregar-btn" class="btn-primario">Agregar al Carrito</button>
         </div>
       </div>
     </div>

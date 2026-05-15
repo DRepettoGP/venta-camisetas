@@ -103,10 +103,10 @@ class UIManager {
     document.getElementById('modal-precio-value').textContent = this.formatearPrecio(
       producto.precio
     );
-    document.getElementById('modal-stock-value').textContent =
-      producto.stock > 0
-        ? `${producto.stock} disponibles`
-        : 'Agotado';
+    const stockEl = document.getElementById('modal-stock-value');
+    const hayStock = producto.stock > 0;
+    stockEl.textContent = hayStock ? `${producto.stock} en stock` : 'Agotado';
+    stockEl.classList.toggle('modal-stock-badge--agotado', !hayStock);
     document.getElementById('modal-img').src = this.obtenerUrlImagen(producto.imagen);
     document.getElementById('modal-equipo').textContent = producto.equipo;
     document.getElementById('modal-liga').textContent = producto.liga;
@@ -114,7 +114,7 @@ class UIManager {
     document.getElementById('modal-color').textContent = producto.color;
 
     const tallaSelect = document.getElementById('modal-talla-select');
-    tallaSelect.innerHTML = '<option value="">-- Selecciona --</option>';
+    tallaSelect.innerHTML = '<option value="">Seleccionar</option>';
     producto.talla.forEach((talla) => {
       const option = document.createElement('option');
       option.value = talla;
