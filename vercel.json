@@ -1,11 +1,16 @@
 {
-  "buildCommand": "npm install --prefix ./server",
+  "buildCommand": "npm install && cd server && npm install",
   "outputDirectory": "./client",
   "framework": "static",
+  "functions": {
+    "api/index.js": {
+      "runtime": "nodejs18.x"
+    }
+  },
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "/server/server.js"
+      "dest": "/api"
     },
     {
       "src": "/(.*)",
