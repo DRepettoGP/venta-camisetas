@@ -1,0 +1,189 @@
+/* Filtros Section */
+.filtros-section {
+  background-color: var(--color-fondo);
+  padding: 30px 0;
+  border-bottom: 1px solid var(--color-borde);
+}
+
+.filtros-section h2 {
+  margin-bottom: 20px;
+}
+
+.filtros-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+  align-items: flex-end;
+}
+
+.filtro-grupo {
+  display: flex;
+  flex-direction: column;
+}
+
+.filtro-grupo label {
+  margin-bottom: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.filtro-select,
+.filtro-input {
+  padding: 10px 12px;
+  border: 1px solid var(--color-borde);
+  border-radius: 6px;
+  font-size: 1rem;
+  background-color: var(--color-fondo-input);
+  color: var(--color-texto);
+}
+
+.filtro-select:focus,
+.filtro-input:focus {
+  outline: none;
+  border-color: var(--color-primario);
+  box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+}
+
+.btn-limpiar {
+  background-color: var(--color-fondo-secundario);
+  color: var(--color-texto);
+  border: 1px solid var(--color-borde);
+}
+
+.btn-limpiar:hover {
+  background-color: var(--color-fondo-carta);
+}
+
+/* Catalogo Section */
+.catalogo-section {
+  padding: 60px 0;
+  background-color: var(--color-fondo);
+}
+
+.catalogo-section h2 {
+  margin-bottom: 40px;
+}
+
+/* Productos Grid */
+.productos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 30px;
+}
+
+.producto-card {
+  background: var(--color-fondo-carta);
+  border: 1px solid var(--color-borde);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: var(--transicion);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+}
+
+.producto-card:hover {
+  box-shadow: var(--sombra-lg);
+  transform: translateY(-5px);
+  border-color: var(--color-primario);
+}
+
+.producto-imagen {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  background-color: var(--color-fondo);
+}
+
+.producto-contenido {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.producto-titulo {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--color-texto);
+  min-height: 2.4rem;
+}
+
+.producto-equipo {
+  font-size: 0.9rem;
+  color: var(--color-texto-muted);
+  margin-bottom: 8px;
+}
+
+.producto-liga {
+  font-size: 0.85rem;
+  background-color: var(--color-fondo-secundario);
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  color: var(--color-texto-muted);
+  margin-bottom: 12px;
+  width: fit-content;
+}
+
+.producto-descripcion {
+  font-size: 0.9rem;
+  color: var(--color-texto-muted);
+  margin-bottom: 12px;
+  flex-grow: 1;
+}
+
+.producto-precio {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--color-primario);
+  margin-bottom: 12px;
+}
+
+.producto-stock {
+  font-size: 0.85rem;
+  margin-bottom: 12px;
+}
+
+.stock-disponible {
+  color: var(--color-exito);
+  font-weight: 600;
+}
+
+.stock-agotado {
+  color: var(--color-secundario);
+  font-weight: 600;
+}
+
+.producto-btn {
+  background-color: var(--color-primario);
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transicion);
+}
+
+.producto-btn:hover {
+  background-color: var(--color-primario-hover);
+}
+
+.producto-btn:disabled {
+  background-color: var(--color-fondo-secundario);
+  cursor: not-allowed;
+}
+
+/* Sin productos */
+.no-productos {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--color-texto-muted);
+}
+
+.no-productos h3 {
+  color: var(--color-texto-muted);
+  margin-bottom: 10px;
+}

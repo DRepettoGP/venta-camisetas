@@ -1,0 +1,5 @@
+yk9Y1owWjoWutsDc
+
+mongodb+srv://danielrepettogp_db_user:yk9Y1owWjoWutsDc@cluster0.8b7hlvc.mongodb.net/
+
+ 

@@ -1,0 +1,24 @@
+{
+  "name": "venta-camisetas-api",
+  "version": "1.0.0",
+  "description": "API para La Grada - plataforma de venta de camisetas de fútbol",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "seed": "node data/seedDatabase.js"
+  },
+  "keywords": ["api", "express", "mongodb", "ecommerce"],
+  "author": "Tu Equipo",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^7.0.0",
+    "dotenv": "^16.0.3",
+    "jsonwebtoken": "^9.0.0",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "helmet": "^7.0.0"
+  }
+}

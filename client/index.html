@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>La Grada - Tienda Online de Camisetas de Fútbol</title>
+  <link rel="stylesheet" href="css/estilos.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/catalogo.css">
+  <link rel="stylesheet" href="css/modal.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-container">
+      <div class="navbar-logo">
+        <a href="index.html"><span class="logo-text">La Grada</span></a>
+      </div>
+      
+      <div class="navbar-menu">
+        <div class="navbar-search">
+          <input type="text" id="buscar-input" placeholder="Buscar camisetas..." class="search-input">
+          <button id="buscar-btn" class="search-btn">Buscar</button>
+        </div>
+        
+        <ul class="navbar-items">
+          <li>
+            <button id="modo-oscuro-btn" class="nav-link modo-oscuro-btn" title="Cambiar modo">
+              🌙
+            </button>
+          </li>
+          <li><a href="index.html" class="nav-link">Catálogo</a></li>
+          <li>
+            <button id="carrito-btn" class="nav-link carrito-link">
+              Carrito <span id="carrito-count" class="carrito-count">0</span>
+            </button>
+          </li>
+          <li>
+            <div id="usuario-menu" class="usuario-menu">
+              <button id="usuario-btn" class="nav-link usuario-link">Mi Cuenta</button>
+              <div id="usuario-dropdown" class="usuario-dropdown">
+                <a href="#" id="ver-pedidos-link" class="dropdown-item" style="display: none;">Mis Pedidos</a>
+                <a href="#" id="admin-link" class="dropdown-item" style="display: none;">Panel Admin</a>
+                <a href="#" id="logout-link" class="dropdown-item" style="display: none;">Cerrar Sesión</a>
+                <a href="#" id="login-link" class="dropdown-item">Iniciar Sesión</a>
+                <a href="#" id="registro-link" class="dropdown-item">Registrarse</a>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main-content" class="main-content">
+    <section class="hero">
+      <div class="hero-content">
+        <h1>La Grada</h1>
+        <p>Encuentra las camisetas de tus equipos favoritos con la mejor calidad</p>
+      </div>
+    </section>
+    
+    
+    <section class="filtros-section">
+      <div class="container">
+        <h2>Filtros</h2>
+        <div class="filtros-container">
+          <div class="filtro-grupo">
+            <label for="filtro-liga">Liga:</label>
+            <select id="filtro-liga" class="filtro-select">
+              <option value="">Todas las ligas</option>
+            </select>
+          </div>
+          <div class="filtro-grupo">
+            <label for="filtro-equipo">Equipo:</label>
+            <input type="text" id="filtro-equipo" placeholder="Nombre del equipo" class="filtro-input">
+          </div>
+          <button id="filtro-limpiar" class="btn-secundario">Limpiar Filtros</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="catalogo-section">
+      <div class="container">
+        <h2>Catálogo de Camisetas</h2>
+        <div id="productos-grid" class="productos-grid">
+          <div class="loading">Cargando productos...</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal de Detalle de Producto -->
+  <div id="modal-producto" class="modal">
+    <div class="modal-content">
+      <span class="modal-close">&times;</span>
+      <div class="modal-body">
+        <div class="modal-imagen">
+          <img id="modal-img" src="" alt="Producto">
+        </div>
+        <div class="modal-info">
+          <h2 id="modal-nombre"></h2>
+          <p id="modal-descripcion"></p>
+          <div class="modal-precio">
+            <span id="modal-precio-value" class="precio"></span>
+          </div>
+          <div class="modal-stock">
+            <span id="modal-stock-value"></span>
+          </div>
+          <div class="modal-detalles">
+            <p><strong>Equipo:</strong> <span id="modal-equipo"></span></p>
+            <p><strong>Liga:</strong> <span id="modal-liga"></span></p>
+            <p><strong>Temporada:</strong> <span id="modal-temporada"></span></p>
+            <p><strong>Color:</strong> <span id="modal-color"></span></p>
+          </div>
+          <div class="modal-talla">
+            <label for="modal-talla-select">Selecciona la talla:</label>
+            <select id="modal-talla-select" class="talla-select">
+              <option value="">-- Selecciona --</option>
+            </select>
+          </div>
+          <div class="modal-cantidad">
+            <label for="modal-cantidad-input">Cantidad:</label>
+            <input type="number" id="modal-cantidad-input" min="1" max="10" value="1">
+          </div>
+          <button id="modal-agregar-btn" class="btn-primario">Agregar al Carrito</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Carrito -->
+  <div id="modal-carrito" class="modal">
+    <div class="modal-content modal-carrito-content">
+      <span class="modal-close">&times;</span>
+      <h2>Carrito de Compra</h2>
+      <div id="carrito-items" class="carrito-items">
+        <p class="carrito-vacio">Tu carrito está vacío</p>
+      </div>
+      <div class="carrito-resumen">
+        <div class="resumen-fila">
+          <span>Subtotal:</span>
+          <span id="carrito-subtotal">$0.00</span>
+        </div>
+        <div class="resumen-fila">
+          <span>Impuestos (5%):</span>
+          <span id="carrito-impuestos">$0.00</span>
+        </div>
+        <div class="resumen-fila total">
+          <span>Total:</span>
+          <span id="carrito-total">$0.00</span>
+        </div>
+      </div>
+      <button id="carrito-proceder-btn" class="btn-primario btn-block" disabled>Proceder al Pago</button>
+    </div>
+  </div>
+
+  <!-- Modal de Checkout -->
+  <div id="modal-checkout" class="modal">
+    <div class="modal-content modal-checkout-content">
+      <span class="modal-close">&times;</span>
+      <h2>Información de Envío y Pago</h2>
+      <form id="checkout-form" class="checkout-form">
+        <div class="form-section">
+          <h3>Dirección de Envío</h3>
+          <div class="form-grupo">
+            <label for="checkout-calle">Calle:</label>
+            <input type="text" id="checkout-calle" required>
+          </div>
+          <div class="form-grupo">
+            <label for="checkout-ciudad">Ciudad:</label>
+            <input type="text" id="checkout-ciudad" required>
+          </div>
+          <div class="form-grupo">
+            <label for="checkout-codigo">Código Postal:</label>
+            <input type="text" id="checkout-codigo" required>
+          </div>
+          <div class="form-grupo">
+            <label for="checkout-pais">País:</label>
+            <input type="text" id="checkout-pais" required>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h3>Información de Pago (Simulado)</h3>
+          <div class="form-grupo">
+            <label for="checkout-tarjeta">Número de Tarjeta:</label>
+            <input type="text" id="checkout-tarjeta" placeholder="1234 5678 9012 3456" maxlength="19" value="4532015112830366" required>
+          </div>
+          <div class="form-fila">
+            <div class="form-grupo">
+              <label for="checkout-expira">Fecha de Vencimiento:</label>
+              <input type="text" id="checkout-expira" placeholder="MM/YY" maxlength="5" value="12/25" required>
+            </div>
+            <div class="form-grupo">
+              <label for="checkout-cvv">CVV:</label>
+              <input type="text" id="checkout-cvv" placeholder="123" maxlength="3" value="123" required>
+            </div>
+          </div>
+        </div>
+
+        <div class="total-checkout">
+          <h3>Total a Pagar: <span id="checkout-total">$0.00</span></h3>
+        </div>
+
+        <button type="submit" class="btn-primario btn-block">Completar Pago</button>
+        <p class="pago-info">* Este es un pago simulado para propósitos de demostración</p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal de Login -->
+  <div id="modal-login" class="modal">
+    <div class="modal-content modal-auth-content">
+      <span class="modal-close">&times;</span>
+      <h2>Iniciar Sesión</h2>
+      <form id="login-form" class="auth-form">
+        <div class="form-grupo">
+          <label for="login-email">Email:</label>
+          <input type="email" id="login-email" required>
+        </div>
+        <div class="form-grupo">
+          <label for="login-password">Contraseña:</label>
+          <input type="password" id="login-password" required>
+        </div>
+        <button type="submit" class="btn-primario btn-block">Iniciar Sesión</button>
+      </form>
+      <p class="auth-link">¿No tienes cuenta? <a href="#" id="switch-registro-link">Regístrate aquí</a></p>
+      <div class="demo-credenciales">
+        <p><strong>Credenciales de Demo:</strong></p>
+        <p>Email: admin@ventacamisetas.com</p>
+        <p>Contraseña: admin123456</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Registro -->
+  <div id="modal-registro" class="modal">
+    <div class="modal-content modal-auth-content">
+      <span class="modal-close">&times;</span>
+      <h2>Registrarse</h2>
+      <form id="registro-form" class="auth-form">
+        <div class="form-grupo">
+          <label for="registro-nombre">Nombre Completo:</label>
+          <input type="text" id="registro-nombre" required>
+        </div>
+        <div class="form-grupo">
+          <label for="registro-email">Email:</label>
+          <input type="email" id="registro-email" required>
+        </div>
+        <div class="form-grupo">
+          <label for="registro-password">Contraseña:</label>
+          <input type="password" id="registro-password" required>
+        </div>
+        <div class="form-grupo">
+          <label for="registro-confirm">Confirmar Contraseña:</label>
+          <input type="password" id="registro-confirm" required>
+        </div>
+        <button type="submit" class="btn-primario btn-block">Registrarse</button>
+      </form>
+      <p class="auth-link">¿Ya tienes cuenta? <a href="#" id="switch-login-link">Inicia sesión aquí</a></p>
+    </div>
+  </div>
+
+  <!-- Modal de Mis Pedidos -->
+  <div id="modal-pedidos" class="modal">
+    <div class="modal-content modal-pedidos-content">
+      <span class="modal-close">&times;</span>
+      <h2>Mis Pedidos</h2>
+      <div id="pedidos-lista" class="pedidos-lista">
+        <p class="loading">Cargando tus pedidos...</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Confirmación -->
+  <div id="modal-confirmacion" class="modal">
+    <div class="modal-content modal-confirmacion-content">
+      <h2 id="confirmacion-titulo">Pago Completado</h2>
+      <div class="confirmacion-body">
+        <div class="confirmacion-icono">✓</div>
+        <p id="confirmacion-mensaje">Tu pedido ha sido procesado exitosamente</p>
+        <div id="confirmacion-detalles" class="confirmacion-detalles"></div>
+      </div>
+      <button id="confirmacion-cerrar" class="btn-primario btn-block">Volver al Catálogo</button>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Sobre La Grada</h3>
+        <p>Somos una plataforma especializada en la venta de camisetas de fútbol originales de las mejores ligas del mundo.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Información Legal</h3>
+        <ul>
+          <li><a href="#">Términos y Condiciones</a></li>
+          <li><a href="#">Política de Privacidad</a></li>
+          <li><a href="#">Política de Devoluciones</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Contacto</h3>
+        <p>Email: info@lagrada.com</p>
+        <p>Teléfono: +34 900 123 456</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 La Grada. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="js/api.js"></script>
+  <script src="js/carrito.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
