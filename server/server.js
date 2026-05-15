@@ -42,7 +42,12 @@ app.use(manejoErrores);
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
-  console.log(`Servidor ejecutándose en puerto ${PORT}`);
-  console.log(`Ambiente: ${process.env.NODE_ENV}`);
-});
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`Servidor ejecutándose en puerto ${PORT}`);
+    console.log(`Ambiente: ${process.env.NODE_ENV}`);
+  });
+}
+
+// Exportar para Vercel
+export default app;

@@ -1,17 +1,8 @@
 {
+  "version": 2,
   "buildCommand": "npm install && cd server && npm install",
-  "outputDirectory": "./client",
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "/api"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
-    }
-  ],
   "env": {
     "NODE_ENV": "production"
   }
 }
+
