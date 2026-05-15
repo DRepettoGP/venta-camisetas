@@ -17,14 +17,30 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
+const isVercel = process.env.VERCEL === '1';
 
-connectDatabase();
-
-app.use(helmet());
+app.use(helmet({ crossOriginResourcePolicy: { policy: 'cross-origin' } }));
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.resolve(__dirname, '../client')));
-app.use('/fotos', express.static(path.resolve(__dirname, '../fotos')));
+
+if (!isVercel) {
+  app.use(express.static(path.resolve(__dirname, '../client')));
+  app.use('/fotos', express.static(path.resolve(__dirname, '../fotos')));
+}
+
+const ensureDatabase = async (req, res, next) => {
+  try {
+    await connectDatabase();
+    next();
+  } catch (error) {
+    res.status(503).json({
+      mensaje: 'No se pudo conectar a la base de datos',
+      error: process.env.NODE_ENV === 'development' ? error.message : undefined,
+    });
+  }
+};
+
+app.use('/api', ensureDatabase);
 
 app.use('/api/auth', authRoutes);
 app.use('/api/productos', productoRoutes);
@@ -34,15 +50,21 @@ app.get('/api/salud', (req, res) => {
   res.status(200).json({ estado: 'Servidor funcionando correctamente' });
 });
 
-app.use((req, res) => {
-  if (req.path.startsWith('/api')) {
-    return res.status(404).json({ mensaje: 'Ruta no encontrada' });
-  }
-  if (req.method === 'GET' || req.method === 'HEAD') {
-    return res.sendFile(path.join(__dirname, '../client/index.html'));
-  }
-  res.status(404).json({ mensaje: 'Ruta no encontrada' });
-});
+if (!isVercel) {
+  app.use((req, res) => {
+    if (req.path.startsWith('/api')) {
+      return res.status(404).json({ mensaje: 'Ruta no encontrada' });
+    }
+    if (req.method === 'GET' || req.method === 'HEAD') {
+      return res.sendFile(path.join(__dirname, '../client/index.html'));
+    }
+    res.status(404).json({ mensaje: 'Ruta no encontrada' });
+  });
+} else {
+  app.use('/api', (req, res) => {
+    res.status(404).json({ mensaje: 'Ruta no encontrada' });
+  });
+}
 
 app.use(manejoErrores);
 

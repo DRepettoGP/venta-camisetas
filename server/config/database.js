@@ -1,18 +1,41 @@
 import mongoose from 'mongoose';
 
-const connectDatabase = async () => {
-  try {
-    const connection = await mongoose.connect(process.env.MONGODB_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+let cached = global.mongoose;
 
-    console.log(`MongoDB conectado: ${connection.connection.host}`);
-    return connection;
+if (!cached) {
+  cached = global.mongoose = { conn: null, promise: null };
+}
+
+const connectDatabase = async () => {
+  if (cached.conn) {
+    return cached.conn;
+  }
+
+  if (!process.env.MONGODB_URI) {
+    throw new Error('MONGODB_URI no está definida en las variables de entorno');
+  }
+
+  if (!cached.promise) {
+    cached.promise = mongoose
+      .connect(process.env.MONGODB_URI, {
+        serverSelectionTimeoutMS: 10000,
+        bufferCommands: false,
+      })
+      .then((mongooseInstance) => {
+        console.log(`MongoDB conectado: ${mongooseInstance.connection.host}`);
+        return mongooseInstance;
+      });
+  }
+
+  try {
+    cached.conn = await cached.promise;
   } catch (error) {
+    cached.promise = null;
     console.error(`Error al conectar MongoDB: ${error.message}`);
     throw error;
   }
+
+  return cached.conn;
 };
 
 export default connectDatabase;

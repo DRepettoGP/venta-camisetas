@@ -211,7 +211,7 @@ a:hover {
 /* Hero Section */
 .hero {
   background: linear-gradient(135deg, rgba(30, 64, 175, 0.8) 0%, rgba(59, 130, 246, 0.8) 100%);
-  background-image: url('../../fotos/banner de futbol.png');
+  background-image: url('/fotos/banner de futbol.png');
   background-size: cover;
   background-position: center;
   color: white;

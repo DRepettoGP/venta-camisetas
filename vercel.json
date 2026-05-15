@@ -1,9 +1,10 @@
 {
   "version": 2,
+  "buildCommand": "npm run build:vercel",
   "installCommand": "npm install && npm install --prefix server",
   "rewrites": [
     {
-      "source": "/(.*)",
+      "source": "/api/:path*",
       "destination": "/api"
     }
   ]

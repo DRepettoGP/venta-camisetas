@@ -11,6 +11,7 @@
     "start": "node server/server.js",
     "dev": "cd server && npm run dev",
     "install-all": "npm install && cd server && npm install",
+    "build:vercel": "node scripts/prepare-public.js",
     "seed": "cd server && npm run seed"
   },
   "keywords": ["ecommerce", "futbol", "camisetas"],
