@@ -300,25 +300,31 @@ async function cargarFiltros() {
 }
 
 // Dark Mode Configuration
+function actualizarBotonTema(btn, isDark) {
+  btn.setAttribute('aria-pressed', String(isDark));
+  btn.setAttribute(
+    'aria-label',
+    isDark ? 'Activar modo claro' : 'Activar modo oscuro'
+  );
+  btn.title = isDark ? 'Modo claro' : 'Modo oscuro';
+}
+
 function configurarModoOscuro() {
   const btn = document.getElementById('modo-oscuro-btn');
   const body = document.body;
 
-  // Load saved preference
   const modoOscuro = localStorage.getItem('modoOscuro') === 'true';
   if (modoOscuro) {
     body.classList.add('dark-mode');
-    btn.textContent = '☀️';
-  } else {
-    btn.textContent = '🌙';
   }
 
-  // Toggle event
+  actualizarBotonTema(btn, modoOscuro);
+
   btn.addEventListener('click', () => {
     body.classList.toggle('dark-mode');
     const isDark = body.classList.contains('dark-mode');
     localStorage.setItem('modoOscuro', isDark);
-    btn.textContent = isDark ? '☀️' : '🌙';
+    actualizarBotonTema(btn, isDark);
   });
 }
 

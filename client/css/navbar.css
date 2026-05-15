@@ -159,17 +159,46 @@
   color: var(--color-primario);
 }
 
-/* Modo Oscuro */
+/* Modo oscuro */
 .modo-oscuro-btn {
-  background: none;
-  border: none;
-  font-size: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  background: transparent;
+  border: 1px solid var(--color-borde);
+  border-radius: 8px;
   cursor: pointer;
-  padding: 5px;
-  border-radius: 4px;
+  color: var(--color-texto-muted);
   transition: var(--transicion);
 }
 
 .modo-oscuro-btn:hover {
   background-color: var(--color-fondo);
+  border-color: var(--color-primario);
+  color: var(--color-primario);
+}
+
+.modo-oscuro-btn:focus-visible {
+  outline: 2px solid var(--color-primario);
+  outline-offset: 2px;
+}
+
+.modo-oscuro-btn .theme-icon {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+.modo-oscuro-btn .theme-icon-sun {
+  display: none;
+}
+
+body.dark-mode .modo-oscuro-btn .theme-icon-moon {
+  display: none;
+}
+
+body.dark-mode .modo-oscuro-btn .theme-icon-sun {
+  display: block;
 }
