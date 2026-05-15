@@ -42,6 +42,7 @@
   --sombra: 0 1px 3px rgba(0, 0, 0, 0.1);
   --sombra-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
   --transicion: all 0.3s ease;
+  --font-sans: 'Source Sans 3', 'Segoe UI', system-ui, -apple-system, sans-serif;
 }
 
 .dark-mode {
@@ -78,10 +79,21 @@ html {
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 400;
   color: var(--color-texto);
   background-color: var(--color-fondo);
   line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
 }
 
 .container {
@@ -92,10 +104,17 @@ body {
 
 /* Typography */
 h1, h2, h3, h4, h5, h6 {
-  font-weight: 700;
-  line-height: 1.2;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
   margin-bottom: 1rem;
   color: var(--color-texto);
+}
+
+h1,
+.hero h1 {
+  font-weight: 700;
 }
 
 h1 { font-size: 2.5rem; }
